@@ -42,8 +42,14 @@ Feature: Guess word on Lingo
       And I get points
       And I can start a new game
 
+      #Failure path
+      Given I am playing a game
+      When the "<guess>" isn't an excisting word
+      And the "<guess>" doesn't have the number of showed letters
+      Then the feedback returns INVALID
+
 
       Examples:
         | word    | guess   | feedback |
-        | banaan  | puzzel  | p: is not in word, u: is not in word, z: is not in word, z: is not in word, e: is not in word, l: is not in word |
-        | raadsel | daadels | d: is not in word, a: correct, a: correct, d: correct, e: is in word, l: is in word, s: is in word |
+        | banaan  | puzzel  | ABSENT, ABSENT, ABSENT, ABSENT, ABSENT, ABSENT |
+        | raadsel | daadels | ABSENT, CORRECT, CORRECT, CORRECT, PRESENT, PRESENT, PRESENT |
